@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useMemo, useState } from 'react';
 import WelcomeStep from './components/WelcomeStep';
 import ServerTypeStep from './components/ServerTypeStep';
 import OptionsStep from './components/OptionsStep';
+import Layout from './components/Layout';
 
 type Step = 'welcome' | 'server-type' | 'options';
 type ServerType = 'self-hosted' | 'cloud' | null;
@@ -28,34 +29,25 @@ function App() {
     setCurrentStep('server-type');
   };
 
+  const stepLabels: string[] = useMemo(() => ['Welcome', 'Hosting', 'Options'], []);
+  const currentStepIndex: number = useMemo(() => {
+    if (currentStep === 'welcome') return 0;
+    if (currentStep === 'server-type') return 1;
+    return 2;
+  }, [currentStep]);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      <div className="container mx-auto px-4 py-12">
-        {currentStep === 'welcome' && (
-          <div className="animate-fade-in">
-            <WelcomeStep onGetStarted={handleGetStarted} />
-          </div>
-        )}
+    <Layout stepLabels={stepLabels} currentStepIndex={currentStepIndex}>
+      {currentStep === 'welcome' && <WelcomeStep onGetStarted={handleGetStarted} />}
 
-        {currentStep === 'server-type' && (
-          <div className="animate-fade-in">
-            <ServerTypeStep 
-              onSelectType={handleSelectServerType}
-              onBack={handleBackToWelcome}
-            />
-          </div>
-        )}
+      {currentStep === 'server-type' && (
+        <ServerTypeStep onSelectType={handleSelectServerType} onBack={handleBackToWelcome} />
+      )}
 
-        {currentStep === 'options' && selectedServerType && (
-          <div className="animate-fade-in">
-            <OptionsStep 
-              serverType={selectedServerType}
-              onBack={handleBackToServerType}
-            />
-          </div>
-        )}
-      </div>
-    </div>
+      {currentStep === 'options' && selectedServerType && (
+        <OptionsStep serverType={selectedServerType} onBack={handleBackToServerType} />
+      )}
+    </Layout>
   );
 }
 
