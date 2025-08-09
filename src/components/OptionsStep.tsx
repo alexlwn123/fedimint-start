@@ -1,4 +1,5 @@
-import { ChevronLeft, Terminal, Package, Link as Linux, Layers } from 'lucide-react';
+import { ChevronLeft, Terminal, Package, Layers, Database } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import StepContainer from './StepContainer';
 import AccessibleCard from './AccessibleCard';
 
@@ -8,7 +9,28 @@ interface OptionsStepProps {
 }
 
 export default function OptionsStep({ serverType, onBack }: OptionsStepProps) {
-  const cloudOptions = [
+  type CloudOption = {
+    name: string;
+    description: string;
+    icon: LucideIcon;
+    price: string;
+    features: string[];
+  };
+
+  type SelfHostedOption = {
+    name: string;
+    description: string;
+    icon: LucideIcon;
+    difficulty: 'Beginner' | 'Advanced' | 'Expert';
+    features: string[];
+  };
+
+  type Option = CloudOption | SelfHostedOption;
+
+  const isSelfHosted = (option: Option): option is SelfHostedOption => 'difficulty' in option;
+  const isCloud = (option: Option): option is CloudOption => 'price' in option;
+
+  const cloudOptions: CloudOption[] = [
     {
       name: 'AWS',
       description: 'Deploy on Amazon Web Services',
@@ -32,7 +54,7 @@ export default function OptionsStep({ serverType, onBack }: OptionsStepProps) {
     }
   ];
 
-  const selfHostedOptions = [
+  const selfHostedOptions: SelfHostedOption[] = [
     {
       name: 'Start9',
       description: 'Personal server OS for self-hosting',
@@ -48,9 +70,9 @@ export default function OptionsStep({ serverType, onBack }: OptionsStepProps) {
       features: ['App store', 'Beautiful UI', 'Bitcoin-focused']
     },
     {
-      name: 'Linux',
-      description: 'Direct installation on Linux server',
-      icon: Linux,
+      name: 'Docker',
+      description: 'Run a Fedimint Guardian server in a Docker container',
+      icon: Database,
       difficulty: 'Advanced',
       features: ['Maximum flexibility', 'Command line', 'Custom setup']
     },
@@ -63,7 +85,7 @@ export default function OptionsStep({ serverType, onBack }: OptionsStepProps) {
     }
   ];
 
-  const options = serverType === 'cloud' ? cloudOptions : selfHostedOptions;
+  const options: Option[] = serverType === 'cloud' ? cloudOptions : selfHostedOptions;
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -85,38 +107,38 @@ export default function OptionsStep({ serverType, onBack }: OptionsStepProps) {
                   </div>
                   <div className="flex-1">
                     <h3 className="text-lg font-bold text-white">{option.name}</h3>
-                    {serverType === 'self-hosted' && (
-                      <span className={`text-xs px-2 py-1 rounded-full ${
-                        (option as any).difficulty === 'Beginner' ? 'bg-green-900/50 text-green-400 border border-green-500/30' :
-                        (option as any).difficulty === 'Advanced' ? 'bg-yellow-900/50 text-yellow-400 border border-yellow-500/30' :
+                  {serverType === 'self-hosted' && isSelfHosted(option) && (
+                      <span className={`text-sm px-2 py-1 rounded-full ${
+                        option.difficulty === 'Beginner' ? 'bg-green-900/50 text-green-400 border border-green-500/30' :
+                        option.difficulty === 'Advanced' ? 'bg-yellow-900/50 text-yellow-400 border border-yellow-500/30' :
                         'bg-red-900/50 text-red-400 border border-red-500/30'
                       }`}>
-                        {(option as any).difficulty}
+                        {option.difficulty}
                       </span>
                     )}
                   </div>
                 </div>
 
-                <p className="text-sm text-gray-400 mb-4">{option.description}</p>
+                <p className="text-base text-gray-400 mb-4">{option.description}</p>
 
-                {serverType === 'cloud' && (
+                {serverType === 'cloud' && isCloud(option) && (
                   <div className="mb-4">
                     <div className="text-lg font-semibold text-white mb-2">
-                      {(option as any).price}
+                      {option.price}
                     </div>
                   </div>
                 )}
 
                 <div className="space-y-2">
                   {option.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-center text-xs text-gray-300">
+                    <div key={featureIndex} className="flex items-center text-sm text-gray-300">
                       <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></div>
                       {feature}
                     </div>
                   ))}
                 </div>
 
-                <button className="w-full mt-6 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 text-sm shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+                <button className="w-full mt-6 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 text-base shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50">
                   {serverType === 'cloud' ? 'Deploy Now' : 'Get Instructions'}
                 </button>
               </div>

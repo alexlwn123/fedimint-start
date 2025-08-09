@@ -1,26 +1,32 @@
 import type { ReactNode } from 'react';
-import { Shield } from 'lucide-react';
+import fedimintIcon from '../../assets/icon.png';
 
 type LayoutProps = {
   children: ReactNode;
   stepLabels?: string[];
   currentStepIndex?: number;
+  onHomeClick?: () => void;
 };
 
-export default function Layout({ children, stepLabels, currentStepIndex = 0 }: LayoutProps) {
+export default function Layout({ children, stepLabels, currentStepIndex = 0, onHomeClick }: LayoutProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       <header className="border-b border-gray-800/80 backdrop-blur supports-[backdrop-filter]:bg-gray-900/60 sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-              <Shield className="w-6 h-6 text-white" aria-hidden="true" />
+          <button
+            type="button"
+            onClick={onHomeClick}
+            className="flex items-center gap-3 group rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+            aria-label="Go to start"
+          >
+            <div className="w-10 h-10 rounded-xl overflow-hidden ring-1 ring-white/10 group-hover:ring-blue-400/40 transition-colors">
+              <img src={fedimintIcon} alt="Fedimint logo" className="w-full h-full object-contain" />
             </div>
-            <div>
-              <span className="block text-white font-semibold leading-tight">Fedimint Start</span>
-              <span className="block text-xs text-gray-400 leading-tight">Create your federated ecash mint</span>
+            <div className="text-left">
+              <span className="block text-white font-semibold leading-tight group-hover:text-white">Fedimint Start</span>
+              <span className="block text-sm text-gray-400 leading-tight group-hover:text-gray-300">Create your federated ecash mint</span>
             </div>
-          </div>
+          </button>
 
           {stepLabels && stepLabels.length > 0 && (
             <nav aria-label="Progress" className="hidden md:block">
@@ -32,7 +38,7 @@ export default function Layout({ children, stepLabels, currentStepIndex = 0 }: L
                     <li key={label} className="flex items-center gap-3">
                       <div
                         className={
-                          `w-8 h-8 rounded-full grid place-items-center border text-xs font-semibold ` +
+                          `w-8 h-8 rounded-full grid place-items-center border text-sm font-semibold ` +
                           (isCompleted
                             ? 'bg-green-600/90 border-green-500 text-white'
                             : isCurrent
@@ -59,7 +65,7 @@ export default function Layout({ children, stepLabels, currentStepIndex = 0 }: L
         {children}
       </main>
 
-      <footer className="mt-10 py-8 border-t border-gray-800/80 text-center text-xs text-gray-500">
+      <footer className="mt-10 py-8 border-t border-gray-800/80 text-center text-sm text-gray-500">
         <div className="container mx-auto px-4">
           Built with ❤️ for the Fedimint community
         </div>

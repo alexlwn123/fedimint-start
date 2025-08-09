@@ -23,14 +23,14 @@ export default function ServerTypeStep({ onSelectType, onBack }: ServerTypeStepP
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-white">Self Hosted Server</h3>
-                  <p className="text-sm text-gray-400">Complete control & privacy</p>
+                  <p className="text-base text-gray-400">Complete control & privacy</p>
                 </div>
               </div>
               <div className="space-y-4 mb-8">
-                <div className="flex items-center text-sm text-gray-300"><div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>Full control over your infrastructure</div>
-                <div className="flex items-center text-sm text-gray-300"><div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>No recurring hosting fees</div>
-                <div className="flex items-center text-sm text-gray-300"><div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>Maximum privacy and security</div>
-                <div className="flex items-center text-sm text-gray-300"><div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>Requires technical setup</div>
+                <div className="flex items-center text-base text-gray-300"><div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>Full control over your infrastructure</div>
+                <div className="flex items-center text-base text-gray-300"><div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>No recurring hosting fees</div>
+                <div className="flex items-center text-base text-gray-300"><div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>Maximum privacy and security</div>
+                <div className="flex items-center text-base text-gray-300"><div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>Requires technical setup</div>
               </div>
               <div className="w-full bg-green-600 hover:bg-green-500 text-white font-semibold py-3 px-6 rounded-xl transition-colors duration-200 shadow-lg text-center">Choose Self Hosted</div>
             </div>
@@ -44,14 +44,14 @@ export default function ServerTypeStep({ onSelectType, onBack }: ServerTypeStepP
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-white">Cloud Hosted</h3>
-                  <p className="text-sm text-gray-400">Quick & managed setup</p>
+                  <p className="text-base text-gray-400">Quick & managed setup</p>
                 </div>
               </div>
               <div className="space-y-4 mb-8">
-                <div className="flex items-center text-sm text-gray-300"><div className="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>Instant deployment in minutes</div>
-                <div className="flex items-center text-sm text-gray-300"><div className="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>Automated backups & updates</div>
-                <div className="flex items-center text-sm text-gray-300"><div className="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>24/7 monitoring & support</div>
-                <div className="flex items-center text-sm text-gray-300"><div className="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>Monthly subscription required</div>
+                <div className="flex items-center text-base text-gray-300"><div className="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>Instant deployment in minutes</div>
+                <div className="flex items-center text-base text-gray-300"><div className="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>Automated backups & updates</div>
+                <div className="flex items-center text-base text-gray-300"><div className="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>24/7 monitoring & support</div>
+                <div className="flex items-center text-base text-gray-300"><div className="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>Monthly subscription required</div>
               </div>
               <div className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-6 rounded-xl transition-colors duration-200 shadow-lg text-center">Choose Cloud Hosted</div>
             </div>

@@ -29,6 +29,11 @@ function App() {
     setCurrentStep('server-type');
   };
 
+  const handleHomeClick = () => {
+    setCurrentStep('welcome');
+    setSelectedServerType(null);
+  };
+
   const stepLabels: string[] = useMemo(() => ['Welcome', 'Hosting', 'Options'], []);
   const currentStepIndex: number = useMemo(() => {
     if (currentStep === 'welcome') return 0;
@@ -37,7 +42,7 @@ function App() {
   }, [currentStep]);
 
   return (
-    <Layout stepLabels={stepLabels} currentStepIndex={currentStepIndex}>
+    <Layout stepLabels={stepLabels} currentStepIndex={currentStepIndex} onHomeClick={handleHomeClick}>
       {currentStep === 'welcome' && <WelcomeStep onGetStarted={handleGetStarted} />}
 
       {currentStep === 'server-type' && (
