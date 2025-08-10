@@ -41,8 +41,10 @@ function App() {
     return 2;
   }, [currentStep]);
 
+  const showHeader = currentStep !== 'welcome';
+
   return (
-    <Layout stepLabels={stepLabels} currentStepIndex={currentStepIndex} onHomeClick={handleHomeClick}>
+    <Layout stepLabels={stepLabels} currentStepIndex={currentStepIndex} onHomeClick={handleHomeClick} showHeader={showHeader}>
       {currentStep === 'welcome' && <WelcomeStep onGetStarted={handleGetStarted} />}
 
       {currentStep === 'server-type' && (

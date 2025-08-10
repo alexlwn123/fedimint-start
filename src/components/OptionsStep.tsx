@@ -97,16 +97,20 @@ export default function OptionsStep({ serverType, onBack }: OptionsStepProps) {
             : "Select how you'd like to install and manage your federation"
         }
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div
+          className={
+            `grid grid-cols-1 md:grid-cols-2 ${serverType === 'cloud' ? 'lg:grid-cols-3' : 'lg:grid-cols-4'} gap-8 mb-8 items-stretch`
+          }
+        >
           {options.map((option) => (
-            <AccessibleCard key={option.name} title={option.name}>
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gray-700 border border-gray-600 rounded-xl flex items-center justify-center mr-3">
-                    <option.icon className="w-6 h-6 text-gray-300" aria-hidden="true" />
+            <AccessibleCard key={option.name} title={option.name} className="h-full">
+              <div className="p-8 flex flex-col h-full">
+                <div className="flex items-center mb-6">
+                  <div className="w-14 h-14 bg-gray-700 border border-gray-600 rounded-xl flex items-center justify-center mr-4">
+                    <option.icon className="w-7 h-7 text-gray-300" aria-hidden="true" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-bold text-white">{option.name}</h3>
+                    <h3 className="text-xl font-bold text-white">{option.name}</h3>
                   {serverType === 'self-hosted' && isSelfHosted(option) && (
                       <span className={`text-sm px-2 py-1 rounded-full ${
                         option.difficulty === 'Beginner' ? 'bg-green-900/50 text-green-400 border border-green-500/30' :
@@ -129,16 +133,16 @@ export default function OptionsStep({ serverType, onBack }: OptionsStepProps) {
                   </div>
                 )}
 
-                <div className="space-y-2">
+                <div className="space-y-3 flex-1">
                   {option.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-center text-sm text-gray-300">
-                      <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></div>
+                    <div key={featureIndex} className="flex items-center text-base text-gray-300">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
                       {feature}
                     </div>
                   ))}
                 </div>
 
-                <button className="w-full mt-6 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 text-base shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+                <button className="w-full mt-8 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 text-base shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50">
                   {serverType === 'cloud' ? 'Deploy Now' : 'Get Instructions'}
                 </button>
               </div>
